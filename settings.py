@@ -4,7 +4,7 @@ MONGO_URI = os.getenv('MONGO_URI')
 
 PAGINATION = False
 HATEOAS = False
-DEBUG = True
+DEBUG = False
 
 DOMAIN = {
     'objects': {
