@@ -1,0 +1,31 @@
+version: 2  
+
+services:
+
+  mongo:
+    image: mongo:4
+    restart: always
+    volumes: 
+        - ./mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 127.0.0.1:5001:8081
+    environment:
+      - ME_CONFIG_MONGODB_URL="mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/db?ssl=false"
+
+  api:
+    build: .
+    restart: always
+    environment: 
+      - MONGO_URI="mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/db?ssl=false"
+    ports:
+      - 127.0.0.1:5000:5000
+    volumes:
+      - ./settings.py:/eve/settings.py
+      - ./server.py:/eve/server.py
