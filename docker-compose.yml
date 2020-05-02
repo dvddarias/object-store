@@ -3,29 +3,26 @@ version: "2"
 services:
 
   mongo:
+    container_name: object-store_db
     image: mongo:4
     restart: always
     volumes: 
         - ./mongodb_data:/data/db
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: "${MONGO_USERNAME}"
-    #   MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"
 
   mongo-express:
+    container_name: object-store_webui
     image: mongo-express
     restart: always
     ports:
       - 127.0.0.1:5001:8081
     environment:
       ME_CONFIG_MONGODB_URL: "mongodb://mongo:27017"
-    #   ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
-    #   ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
       ME_CONFIG_BASICAUTH_USERNAME: ${WEBUI_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${WEBUI_PASSWORD}
 
-
   api:
     build: .
+    container_name: object-store_api
     restart: always
     environment: 
       MONGO_URI: "mongodb://mongo:27017/db"
