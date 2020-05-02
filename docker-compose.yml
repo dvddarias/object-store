@@ -17,13 +17,18 @@ services:
     ports:
       - 127.0.0.1:5001:8081
     environment:
-      - ME_CONFIG_MONGODB_URL="mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/db?ssl=false"
+      ME_CONFIG_MONGODB_URL: "mongodb://mongo:27017/db?ssl=false"
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
+      ME_CONFIG_BASICAUTH_USERNAME: ${WEBUI_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${WEBUI_PASSWORD}
+
 
   api:
     build: .
     restart: always
     environment: 
-      - MONGO_URI="mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/db?ssl=false"
+      MONGO_URI: "mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/db?ssl=false"
     ports:
       - 127.0.0.1:5000:5000
     volumes:
