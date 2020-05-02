@@ -1,0 +1,5 @@
+mongodb_data
+.env
+Caddyfile
+server.py
+settings.py
