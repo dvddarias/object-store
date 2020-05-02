@@ -31,3 +31,4 @@ services:
     volumes:
       - ./settings.py:/eve/settings.py
       - ./server.py:/eve/server.py
+    command: ["gunicorn", "-k", "gevent", "-b", "0.0.0.0:5000", "-w", "4", "--access-logfile=-", "--preload", "server:app"]
