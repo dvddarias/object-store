@@ -1,5 +1,6 @@
 import os
 import sys
+import signal
 from eve import Eve
 
 def signal_handler(signal, frame):
