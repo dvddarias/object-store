@@ -10,5 +10,4 @@ DOMAIN = {
     'objects': {
         'resource_methods': ['GET', 'POST']
         }
-    }
 }
