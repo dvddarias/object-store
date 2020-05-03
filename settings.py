@@ -8,6 +8,7 @@ DEBUG = False
 
 DOMAIN = {
     'objects': {
-        'resource_methods': ['GET', 'POST']
+        'resource_methods': ['POST'],
+        'allow_unknown': True
         }
 }
